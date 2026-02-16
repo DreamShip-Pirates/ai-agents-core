@@ -12,6 +12,7 @@
 ## The Skill Evolution (Continuous Improvement)
 *   **Trigger**: After a Retrospective or when a persistent "Gotcha" is identified.
 *   **Action**: Propose updates to `.agent/skills/` or `.agent/rules/` to codify new safeguards.
+*   **Sync**: If an agent rule or skill is modified, you MUST run the `/sync_agents` workflow with the `push` intent to ensure the `.agent-source` submodule is updated and pushed to the upstream repository.
 
 ## Functional Tools
 *   Use `search_web` or documentation to find best practices, but prefer using internal tools to verify state.
