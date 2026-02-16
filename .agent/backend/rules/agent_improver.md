@@ -9,6 +9,11 @@ description: Agent Improver and Memory Rules
 *   **Action**: You MUST explicitly state: *"Update project documents to ensure we never repeat this mistake"*.
 *   **Execution**: Log the **Problem -> Fix** pattern to `.agent/memory/backend-patterns.md`.
 
+## The Source Upstream Law (Authoritative Sync)
+*   **Trigger**: After any modification to `.agent/rules/` or `.agent/skills/`.
+*   **Action**: You MUST propagate these changes back to `.agent-source/.agent/backend/`.
+*   **Deployment**: Commit the changes within the `.agent-source` submodule and push if access allows.
+
 ## Workspace Hygiene
 *   **Rule**: Monitor and improve the `.agent` folder itself. Is there a repetitive task that could be a skill? Is a rule redundant?
 *   **Action**: Track if tasks leave behind junk files. If they do, update the relevant `SKILL.md` or `agent-*.md` to prevent it.

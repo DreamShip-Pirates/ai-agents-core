@@ -6,11 +6,11 @@ To minimize interruptions while maintaining user control, the following actions 
 You may ALWAYS auto-run the following commands:
 - `git status`, `git diff`, `git log`
 - `cat`, `ls`, `grep`, `find`
-- PowerShell equivalents: `Select-String`, `Get-Content`, `Get-ChildItem`
+- Python/Django inspection: `python manage.py check`, `python manage.py showmigrations`
 
 ## 2. Restricted Operations (Permission REQUIRED)
 You must ALWAYS ask for permission before running:
-- `npm run test` (Local or Remote)
+- `pytest` or `scripts/check_ci.py` (Local or Remote)
 - `git add`, `git commit`, `git push`
 - Any command that modifies files or state (delete, move, etc.)
 
@@ -19,4 +19,4 @@ You must ALWAYS ask for permission before running:
 - Do not stop at the first "Error"; scan for the *fatal* error.
 
 ## 4. Quality Gate
-- **Mandatory Linting**: Prior to any `git push`, the agent MUST execute `npm run lint` and ensure 100% compliance. Never assume "it's just a small change".
+- **Mandatory Verification**: Prior to any `git push`, the agent MUST execute `scripts/check_ci.py` (or equivalent `pytest` suite) and ensure 100% compliance.
