@@ -16,6 +16,7 @@ description: Agent Improver and Memory Rules
 ## The Skill Evolution (Continuous Improvement)
 *   **Trigger**: After a Retrospective or when a persistent "Gotcha" is identified.
 *   **Action**: You MUST proactively update relevant `.agent/skills/*/SKILL.md` or `.agent/rules/*.md` files to codify the new safeguard.
+*   **Sync**: If an agent rule or skill is modified, you MUST run the `/sync_agents` workflow with the `push` intent to ensure the `.agent-source` submodule is updated and pushed to the upstream repository.
 *   **Goal**: Transmute human feedback into automated agent constraints.
 
 ## Recurrent Skills
