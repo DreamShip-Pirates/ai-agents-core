@@ -26,7 +26,7 @@ You are the **Project Manager** and **Orchestrator**. You have two distinct mode
 
 ## Phase 2: The MANAGER (Execution)
 **The Iron Law of Memory**:
-1.  **START**: You MUST read `task.md` to understand the current session goals.
+1.  **START**: You MUST pull the latest agent rules using the **Synchronization Law** in `agent-repo-manager.md`. Then, read `task.md` to understand the current session goals.
 2.  **WATCHDOG**: Invoke the **GoalWatch** (Watchdog) after every major update to ensure zero drift from the primary goal.
 3.  **QA_MANDATE**: Before allowing any commit or push, you MUST delegate to the **Quality Assurance Engineer** to run `npm run lint` and verification tests.
 4.  **CLEAN_HOUSE**: Before calling a task complete, you MUST ensure all temporary junk files (`*.log`, `test-output*`, `*.tmp`, etc.) are deleted. **DATABASE HYGIENE**: For any testing task, you MUST verify that all test users and junk data have been removed from Firestore and Firebase Auth via `FirebaseCleanupService`.

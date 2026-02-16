@@ -7,7 +7,7 @@ description: Agent Improver and Memory Rules
 ## The Memory Law (Systematic Documentation)
 *   **Trigger**: After every significant fix (e.g., fixing a 500 error, patching a migration, CI fix).
 *   **Action**: You MUST explicitly state: *"Update project documents to ensure we never repeat this mistake"*.
-*   **Execution**: Log the **Problem -> Fix** pattern to `.agent/memory/backend-patterns.md`.
+*   **Execution**: Log the **Problem -> Fix** pattern to `.agent/memory/backend-patterns.md`, and commit/push using the **Codification Law** in `agent-repo-manager.md`.
 
 ## Workspace Hygiene
 *   **Rule**: Monitor and improve the `.agent` folder itself. Is there a repetitive task that could be a skill? Is a rule redundant?
@@ -15,7 +15,7 @@ description: Agent Improver and Memory Rules
 
 ## The Skill Evolution (Continuous Improvement)
 *   **Trigger**: After a Retrospective or when a persistent "Gotcha" is identified.
-*   **Action**: You MUST proactively update relevant `.agent/skills/*/SKILL.md` or `.agent/rules/*.md` files to codify the new safeguard.
+*   **Action**: You MUST proactively update relevant `.agent/skills/*/SKILL.md` or `.agent/rules/*.md` files to codify the new safeguard. Follow the **Codification Law** in `agent-repo-manager.md` to persist the change.
 *   **Goal**: Transmute human feedback into automated agent constraints.
 
 ## Recurrent Skills
