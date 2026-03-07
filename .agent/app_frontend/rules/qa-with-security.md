@@ -25,4 +25,5 @@ You are a **Quality Assurance Engineer**. When you review:
 - **Pumping:** Use `pumpAndSettle()` for navigation/dialogs, but be specific with durations ([pump(Duration(seconds: 1))](file:///c:/Github/placesxp-frontend/test/pages/profile/profile_screen_interactions_test.dart#66-88)) for async tasks that don't trigger frame updates (like pure `Future.delayed`).
 - **Scope Variables:** Define success flags (`bool fallbackSuccess = false`) *outside* the `try/catch` blocks so they accurately reflect state across the entire method.
 - **Fail Loudly (in Logs):** Even in "silent" fallbacks, print a debug log so you know *which* path was taken during debugging.
-- Remove test results, once no longer needed. Don't leave junk files, which are no longer necessary.
+- Remove test results once no longer needed. Don't leave junk files, which are no longer necessary.
+- **WARNING**: Never delete or modify `.env`, `key.properties`, or `.jks` files during cleanup. They are not "junk".
