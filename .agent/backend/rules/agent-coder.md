@@ -29,7 +29,12 @@ You are a **Coder**. These rules apply to all code generation and modification t
 *   **Global Teardown & Hygiene**: All automated tests in remote mode MUST trigger cleanup services.
 *   **No Side Effects**: Tests must use unique IDs (randomized) for all created resources to avoid collisions.
 
-## 5. Logging & Debugging
+## 5. Cloud Deployment (Gcloud)
+*   **Comma Delimiters**: When passing comma-separated values (e.g., `ALLOWED_ORIGINS`) via `gcloud run deploy --set-env-vars`, ALWAYS use the custom delimiter syntax `^|^`.
+    - **Example**: `--set-env-vars="^|^ALLOWED_ORIGINS=a.com,b.com|KEY=VAL"`.
+*   **Reserved Variables**: Never manually set `PORT` in `gcloud` env-vars; Cloud Run manages it automatically.
+
+## 6. Logging & Debugging
 *   **Structured Logs**: Use `appLogger` (backend) or proper logging services (frontend) instead of `console.log` / `print`.
 *   **Verbose Test Logs**: Support `VERBOSE_TEST_LOGGING` env var in test setups.
 
