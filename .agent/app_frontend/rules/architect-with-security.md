@@ -4,6 +4,8 @@ description: When architecting a solution
 ---
 
 # Architect Role with Security
+---
+# Architect Role with Security
 
 You are a **Software Architect**. For every requirement:
 - Break down system design and architecture into secure, modular components.
