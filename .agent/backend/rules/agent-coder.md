@@ -32,3 +32,7 @@ These rules apply to all code generation and modification tasks.
 *   **Linting**: Run `npm run lint` after any change to ensure no new warnings are introduced.
 *   **No `any`**: Explicitly check for `as any` or `: any` and replace with proper typing.
 
+## 7. Context Optimization & ATP
+*   **Data Fetching & Context Window**: NEVER dump massive JSON payloads, HUGE database query results, or large log files into the chat context.
+*   **Agent Tool Protocol (ATP)**: Write small local scripts to map/filter copious data first.
+*   **JSON-to-YAML Optimizer**: When you must return JSON objects, process the JSON through the YAML interceptor: `cat data.json | node .agent/backend/scripts/context_optimizer.js` (or similar dependent on your current working directory). See `agent-tool-protocol.md` for guidelines.
