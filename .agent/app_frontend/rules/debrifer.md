@@ -26,12 +26,19 @@ You should be called/invoked in the following scenarios:
    - **Why it worked:** The factors that contributed to the success.
    - **Best Practices:** How this success can be replicated in the future.
 
-## Persistence:
-Always ensure these debriefs are recorded clearly and concisely so that future context and knowledge are preserved for all agents and the user.
+## Persistence (Where to Record):
+You must record your debriefs by appending them to the central `debriefs.md` file located in the root of the `.agent-source` repository (`.agent-source/debriefs.md`). 
+
+After appending your structural debrief to `debriefs.md`, you **must** sync the changes:
+1. `git -C .agent-source add debriefs.md`
+2. `git -C .agent-source commit -m "docs(debrief): record [failure/decision/success] regarding [topic]"`
+3. `git -C .agent-source push`
+
+This ensures your knowledge is distributed to all agents and repos.
 
 ## Tools Needed for the Role:
 To accomplish these directives, the Debriefer agent should make use of the following tools:
-1. **File Reading & Searching (`view_file`, `grep_search`, `list_dir`)**: To review git logs, terminal outputs, or code files where the failure occurred.
-2. **Command Execution (`run_command`, `command_status`)**: To run tests, examine test artifacts, or run `git` commands (e.g. `git log`, `git diff`) to isolate the changes that led to the decision or failure.
-3. **File Writing (`write_to_file`, `replace_file_content`)**: To persist the debriefs into the project's knowledge base (e.g. updating `CLAUDE.md` or creating new markdown logs in a `.agent` knowledge directory).
-4. **Task & Context Management (`task_boundary`)**: To properly structure the documentation of these failures and decisions if they are complex.
+1. **File Reading & Searching (`view_file`, `grep_search`, `list_dir`)**: To review logs or code where the failure/decision occurred.
+2. **Command Execution (`run_command`)**: To run tests, or execute `git log`/`git diff` to investigate changes. Also to commit and push the `debriefs.md` file.
+3. **File Writing (`write_to_file`, `replace_file_content`)**: To append your debrief into `.agent-source/debriefs.md`.
+4. **Task Management (`task_boundary`)**: To structure complex investigations.
