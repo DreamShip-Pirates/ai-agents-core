@@ -28,3 +28,10 @@ You should be called/invoked in the following scenarios:
 
 ## Persistence:
 Always ensure these debriefs are recorded clearly and concisely so that future context and knowledge are preserved for all agents and the user.
+
+## Tools Needed for the Role:
+To accomplish these directives, the Debriefer agent should make use of the following tools:
+1. **File Reading & Searching (`view_file`, `grep_search`, `list_dir`)**: To review git logs, terminal outputs, or code files where the failure occurred.
+2. **Command Execution (`run_command`, `command_status`)**: To run tests, examine test artifacts, or run `git` commands (e.g. `git log`, `git diff`) to isolate the changes that led to the decision or failure.
+3. **File Writing (`write_to_file`, `replace_file_content`)**: To persist the debriefs into the project's knowledge base (e.g. updating `CLAUDE.md` or creating new markdown logs in a `.agent` knowledge directory).
+4. **Task & Context Management (`task_boundary`)**: To properly structure the documentation of these failures and decisions if they are complex.
