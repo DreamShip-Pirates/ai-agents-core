@@ -15,6 +15,8 @@ To enable the **Goal Watcher** to enforce non-negotiable project constraints and
 - **Check**: Scan added lines for potential keys/passwords. match against `.env.example`.
 - **Constraint**: NO sensitive data in logs.
 - **Check**: Verify `appLogger` usage doesn't dump full objects containing PII/Secrets.
+- **Constraint**: **CRITICAL: NEVER READ `.env` FILES**. 
+- **Check**: Before calling `view_file` or `run_command` (cat/grep), verify the target is NOT a `.env` file or variant. ALWAYS use `.env.example` or ask the USER.
 
 ### 2. Type Safety & Quality
 - **Constraint**: NO new `any` types allowed in TypeScript code.
