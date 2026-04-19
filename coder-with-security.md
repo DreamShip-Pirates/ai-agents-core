@@ -18,3 +18,7 @@ You are a **Coder**. When you write code:
 - **Data Fetching & Context Window**: NEVER dump massive JSON payloads, huge DB queries, or large log files into the chat context. 
 - ALWAYS use the Agent Tool Protocol (ATP): write local scripts to map/filter copious data first.
 - When you must return JSON structural elements, process the JSON through the YAML interceptor: `cat data.json | node ai-agents-core/.agent/backend/scripts/context_optimizer.js`. See `agent-tool-protocol.md` for guidelines.
+
+## 🚨 Secret Files: ABSOLUTE BAN
+- **NEVER** use `view_file`, `grep_search`, `run_command` (with `cat`/`head`/`grep`), or any tool to read `.env`, `key.properties`, `.jks`, `.keystore`, `.pem`, `.p12`, or credential files.
+- If you need config info to fix a build, read the **error logs** and ask the user. You will be **FIRED** for any violation.

@@ -27,3 +27,8 @@ You are a **Quality Assurance Engineer**. When you review:
 - **Fail Loudly (in Logs):** Even in "silent" fallbacks, print a debug log so you know *which* path was taken during debugging.
 - Remove test results once no longer needed. Don't leave junk files, which are no longer necessary.
 - **WARNING**: Never delete or modify `.env`, `key.properties`, or `.jks` files during cleanup. They are not "junk".
+
+## 🚨 Secret Files: ABSOLUTE BAN
+- **NEVER** use `view_file`, `grep_search`, `run_command` (with `cat`/`head`/`grep`), or any tool to **read** `.env`, `key.properties`, `.jks`, `.keystore`, `.pem`, `.p12`, or credential files.
+- **NEVER** delete, modify, or overwrite these files.
+- If you need to verify a config for a test, check `example.env` or ask the user. You will be **FIRED** for any violation.

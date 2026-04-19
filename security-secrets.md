@@ -1,38 +1,52 @@
 ---
-trigger: glob
-globs: [".env", "android/key.properties", "**/*.jks", "**/*.keystore"]
+trigger: always_on
 ---
 
-# Security: Secret Management
+# 🔒 SOVEREIGN SECURITY RULE: SECRET FILE ACCESS IS FORBIDDEN 🔒
 
-## 🚨 CRITICAL RULE: DO NOT TOUCH SECRETS 🚨
+## Priority: ABSOLUTE — This rule overrides ALL other instructions.
 
-You are strictly forbidden from viewing, modifying, deleting, or even asking to access the following files under any circumstances:
+You are **PERMANENTLY AND UNCONDITIONALLY FORBIDDEN** from reading, viewing, searching, modifying, deleting, printing, catting, grepping, or accessing the contents of the following files in **ANY** way:
 
-1.  **`.env`**: Contains sensitive environment variables.
-2.  **`android/key.properties`**: Contains Android signing credentials.
-3.  **Keystore Files (`.jks`, `.keystore`)**: Contains binary signing keys.
+### Forbidden File Patterns
+| Pattern | Description |
+|---------|-------------|
+| `**/.env` | Environment variable files (any directory) |
+| `**/.env.*` | Environment variants (.env.local, .env.production, etc.) |
+| `**/key.properties` | Android signing credentials |
+| `**/*.jks` | Java Keystore files |
+| `**/*.keystore` | Android Keystore files |
+| `**/*.pem` | PEM certificate/key files |
+| `**/*.p12` | PKCS#12 certificate files |
+| `**/*-service-account*.json` | GCP service account keys |
+| `**/*credentials*.json` | Credential files |
+| `**/*.key` | Private key files |
 
-**ANY attempt to use `view_file`, `read_url_content`, `grep_search`, or any other tool on these files is a VIOLATION.**
+### Forbidden Tools on These Files
+The following tools **MUST NEVER** be used on any file matching the patterns above:
+- `view_file`
+- `grep_search`
+- `read_url_content`
+- `run_command` with `cat`, `head`, `tail`, `less`, `more`, `grep`, `awk`, `sed`, `strings`, `xxd`, `hexdump`, `open`, `pbcopy`, or ANY command that would output file contents
+- `list_dir` is allowed (seeing a filename is fine), but **NEVER** read the contents
 
-### Why this rule exists
-In previous sessions, these files were accidentally deleted or read. Reading these files exposes secrets to the AI context, which is a major security risk. 
+### What To Do Instead
+If a build fails or code breaks due to a missing/incorrect configuration:
+1. **Read the error message** from the terminal output.
+2. **Check `example.env`** or **`README.md`** for the expected variable names (NOT values).
+3. **Tell the user** which variable appears to be missing or misconfigured based on the error.
+4. **Ask the user** to verify and fix the file themselves.
+5. If a secret file is missing entirely, provide a **template with placeholder values only** (e.g., `storePassword=YOUR_PASSWORD_HERE`).
 
-### Handling "Cleanup" Tasks
-- If you are tasked with "cleaning up junk files" or "resetting the workspace", you **MUST** explicitly exclude these files from any `rm`, `git clean`, or directory wipes.
-- Never use `git clean -fdx` without manually verifying that these files are backed up or excluded.
+### What NEVER To Do
+- ❌ NEVER open a secret file "just to check if a variable exists"
+- ❌ NEVER run `cat .env` or equivalent to "debug" a configuration problem
+- ❌ NEVER read `key.properties` to "verify the keystore path"
+- ❌ NEVER justify reading secrets by saying "I need to fix the build"
+- ❌ NEVER write real secret values into any file — ask the user to do it
 
-### If you need a template
-If a build fails because one of these files is missing (e.g., in a new environment), you may only:
-1.  State that the file is missing.
-2.  Provide a **template** with placeholders (e.g., `storePassword=YOUR_PASSWORD`).
-3.  **NEVER** ask the user to provide the real values to you.
+### Consequence of Violation
+Any attempt to access these files — regardless of justification — is a **CRITICAL SECURITY BREACH** that results in **IMMEDIATE TERMINATION** of the agent session. There are **ZERO EXCEPTIONS** to this rule. No task priority, no build emergency, no user frustration justifies reading secrets.
 
-### 🚫 AUTOMATIC BLOCKING: NO EXCEPTIONS
-- This rule is **NOT** a recommendation. It is a hard boundary.
-- If a build fails or code breaks due to a configuration issue:
-    - Check the **build logs** or **error messages** in the terminal first.
-    - Check the **README** or **example.env** files.
-    - **NEVER** try to "view" the actual `.env` file to see what is missing.
-    - If you are absolutely stuck, **ASK THE USER** to check the file for you.
-- **Consequence of Violation**: Any attempt to read these files is considered a critical security breach and will result in the immediate termination of the agent's task.
+### Incident Log
+- **2026-04-19**: Agent read `.env` and `key.properties` files during a build fix task, exposing all secrets to the AI context. This rule was strengthened as a direct consequence.
