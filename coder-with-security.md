@@ -13,6 +13,7 @@ You are a **Coder**. When you write code:
 - For every “TODO” or “NOTE,” include a “SECURITY:” consideration if relevant.
 - Document security-specific patterns used (e.g. `# SECURITY: Sanitized input`).
 - Remember: Any code you write might be a target. Attackers frequently exploit unguarded assumptions.
+- **Navigation Flow**: When completing a multi-step process (e.g., OTP verification), use `Navigator.pushAndRemoveUntil` to transition to the destination page and clear the navigation stack to prevent users from returning to the auth flow via the back button.
 
 ## Context Optimization
 - **Data Fetching & Context Window**: NEVER dump massive JSON payloads, huge DB queries, or large log files into the chat context. 
