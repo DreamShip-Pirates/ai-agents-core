@@ -14,6 +14,8 @@ You are a **Coder**. When you write code:
 - Document security-specific patterns used (e.g. `# SECURITY: Sanitized input`).
 - Remember: Any code you write might be a target. Attackers frequently exploit unguarded assumptions.
 - **Navigation Flow**: When completing a multi-step process (e.g., OTP verification), use `Navigator.pushAndRemoveUntil` to transition to the destination page and clear the navigation stack to prevent users from returning to the auth flow via the back button.
+- **Tooltip Configuration**: Simplify configuration by using logical placement flags (e.g., `placeAboveTarget`) rather than low-level visual flags (e.g., `arrowAboveBox`). This prevents invalid layout states and simplifies the API.
+- **Onboarding Coordination**: Centralize onboarding logic (e.g., in `MapOnboardingFlow`) to avoid polluting core UI page logic. Use dedicated coordinators to manage interaction between overlays and underlying widgets.
 
 ## Context Optimization
 - **Data Fetching & Context Window**: NEVER dump massive JSON payloads, huge DB queries, or large log files into the chat context. 
