@@ -37,6 +37,8 @@ If a build fails or code breaks due to a missing/incorrect configuration:
 3. **Tell the user** which variable appears to be missing or misconfigured based on the error.
 4. **Ask the user** to verify and fix the file themselves.
 5. If a secret file is missing entirely, provide a **template with placeholder values only** (e.g., `storePassword=YOUR_PASSWORD_HERE`).
+6. **Provide Secure Alternatives**: When asked to retrieve data from forbidden files (like keystore SHA-1s), give the user the exact terminal commands (e.g., `keytool -list ...`) so they can run them securely themselves.
+
 
 ### What NEVER To Do
 - ❌ NEVER open a secret file "just to check if a variable exists"

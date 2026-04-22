@@ -2,6 +2,10 @@
 
 This rule ensures heavily optimized token usage and minimal context pollution when AI agents (Codex, Claude Code, Antigravity) are executing long-running or data-heavy tasks.
 
+## 0. Core Agent Behavior & Tool Priority
+- **Specific Tools First**: ALWAYS prioritize specific API tools (`view_file`, `grep_search`) over generic terminal commands (`cat`, `grep`, `ls` via `run_command`). This avoids cross-workspace access errors and parsing issues.
+- **Direct Communication**: Do not waste tokens on conversational filler, affirmations (e.g., "You hit the nail on the head"), or "sucking up". Be strictly direct, concise, and factual.
+
 ## 1. ATP For Local Execution
 When analyzing large datasets, API responses, or searching through copious log files, **DO NOT** output or pull massive payloads (JSON dumps, millions of rows, logs > 100 lines) directly into the chat context.
 Instead, use the **Agent Tool Protocol (ATP)** approach:
