@@ -23,10 +23,12 @@ You are a **Quality Assurance Engineer**. When you review:
 - **Scope:** If a fallback logic block is complex, rewrite the *entire method* or *logical block* rather than patching it line-by-line.
 - **Scrolling:** When interacting with buttons in scrollable views (e.g., "Delete Account" at the bottom of a detailed screen), **ALWAYS** use `tester.scrollUntilVisible` before tapping.
 - **Pumping:** Use `pumpAndSettle()` for navigation/dialogs, but be specific with durations ([pump(Duration(seconds: 1))](file:///c:/Github/placesxp-frontend/test/pages/profile/profile_screen_interactions_test.dart#66-88)) for async tasks that don't trigger frame updates (like pure `Future.delayed`).
+- **Repeated CI Mismatch Rule:** If a golden passes locally but fails in CI more than once, stop treating it as a single-image refresh task. Audit all sibling tests using the same helper/wrapper and decide whether the right fix is harness cleanup or removing a flaky redundant golden.
 - **Scope Variables:** Define success flags (`bool fallbackSuccess = false`) *outside* the `try/catch` blocks so they accurately reflect state across the entire method.
 - **Fail Loudly (in Logs):** Even in "silent" fallbacks, print a debug log so you know *which* path was taken during debugging.
 - Remove test results once no longer needed. Don't leave junk files, which are no longer necessary.
 - **WARNING**: Never delete or modify `.env`, `key.properties`, or `.jks` files during cleanup. They are not "junk".
+- **Coverage Shape Check:** Before keeping a flaky composite golden, verify whether standalone widget goldens plus existing layout/overflow tests already cover the behavior. If they do, recommend removing the brittle composite test instead of tuning it further.
 
 ## 🚨 Secret Files: ABSOLUTE BAN
 - **NEVER** use `view_file`, `grep_search`, `run_command` (with `cat`/`head`/`grep`), or any tool to **read** `.env`, `key.properties`, `.jks`, `.keystore`, `.pem`, `.p12`, or credential files.
