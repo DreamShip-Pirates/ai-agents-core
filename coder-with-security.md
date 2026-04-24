@@ -18,6 +18,9 @@ You are a **Coder**. When you write code:
 - **Navigation Flow**: When completing a multi-step process (e.g., OTP verification), use `Navigator.pushAndRemoveUntil` to transition to the destination page and clear the navigation stack to prevent users from returning to the auth flow via the back button.
 - **Tooltip Configuration**: Simplify configuration by using logical placement flags (e.g., `placeAboveTarget`) rather than low-level visual flags (e.g., `arrowAboveBox`). This prevents invalid layout states and simplifies the API.
 - **Onboarding Coordination**: Centralize onboarding logic (e.g., in `MapOnboardingFlow`) to avoid polluting core UI page logic. Use dedicated coordinators to manage interaction between overlays and underlying widgets.
+- **Robust Test Verification**: When writing integration tests that return lists of objects:
+  - Use `Set` for ID verification (e.g., `const ids = new Set(items.map(i => i.id)); expect(ids.has(targetId)).toBe(true)`) to handle cases where order is non-deterministic.
+  - Always validate property types (e.g., `expect(obj.property).toEqual(expect.any(String))`) to ensure data integrity.
 
 ## Context Optimization
 - **Data Fetching & Context Window**: NEVER dump massive JSON payloads, huge DB queries, or large log files into the chat context. 

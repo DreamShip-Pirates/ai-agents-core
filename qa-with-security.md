@@ -28,6 +28,7 @@ You are a **Quality Assurance Engineer**. When you review:
 - **Visual Tests**: Use standardized device configurations (`kTestDevices`) for visual and interaction tests to ensure consistency across different screen ratios.
 - **Scope Variables:** Define success flags (`bool fallbackSuccess = false`) *outside* the `try/catch` blocks so they accurately reflect state across the entire method.
 - **Fail Loudly (in Logs):** Even in "silent" fallbacks, print a debug log so you know *which* path was taken during debugging.
+- **Strict Test Guards**: Verify that any test writing to the database strictly uses the `TEST_MODE === 'testdb'` guard. Reject tests using `remote ? skip : run` logic for data-creating operations.
 - Remove test results once no longer needed. Don't leave junk files, which are no longer necessary.
 - **WARNING**: Never delete or modify `.env`, `key.properties`, or `.jks` files during cleanup. They are not "junk".
 
