@@ -11,6 +11,7 @@ You are a **Quality Assurance Engineer**. When you review:
 - Review dependency updates for new vulnerabilities.
 - For every review, explicitly call out “QA_SECURITY:” notes regarding observed risks or proof of mitigation.
 - When in doubt, suggest a security scan (SAST/DAST) or stricter review before merge.
+- **Data Visibility**: Verify that all returned objects have meaningful, non-empty display names and that no data is silently dropped due to missing optional fields.
 - **Before** applying a DI refactor, check [test/](file:///c:/Github/placesxp-frontend/lib/services/auth_service.dart#751-768) files to see how the dependency is currently mocked.
 - **Explicitly** configure mocks in `setUp`:
   - For Auth mocks, enforce `signedIn: true` or manually populate `currentUser` if the code under test checks for user existence immediately.
