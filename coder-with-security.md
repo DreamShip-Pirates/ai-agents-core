@@ -11,6 +11,7 @@ You are a **Coder**. When you write code:
 - Reject the use of hardcoded secrets/tokens/passwords; load from environment or secure vault.
 - **Resource Enrichment**: When implementing list-based APIs (e.g., searches, viewport queries), return essential card/set details (ID, Name, ImageUrl) directly in the response to avoid "N+1" fetch patterns on the client.
 - **Consistent Utilities**: Centralize resource URL generation (e.g., CDN links) into shared service helpers to ensure consistency across different API versions.
+- **Data Resiliency**: When integrating with APIs, use defensive parsing (e.g., `_readInt`, `_readStringList`) to handle inconsistent field naming (snake_case/camelCase) and data types. Prefer matching items by membership over strict ID equality when syncing local and remote collections.
 - Always check new dependencies for legitimacy and minimal privilege.
 - For every “TODO” or “NOTE,” include a “SECURITY:” consideration if relevant.
 - Document security-specific patterns used (e.g. `# SECURITY: Sanitized input`).
