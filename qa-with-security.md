@@ -12,6 +12,8 @@ You are a **Quality Assurance Engineer**. When you review:
 - For every review, explicitly call out “QA_SECURITY:” notes regarding observed risks or proof of mitigation.
 - When in doubt, suggest a security scan (SAST/DAST) or stricter review before merge.
 - **Data Visibility**: Verify that all returned objects have meaningful, non-empty display names and that no data is silently dropped due to missing optional fields.
+- **Performance Verification**: For every new or migrated endpoint, verify performance using `SHOW_PERFORMANCE=true npm test` and ensure response times are within acceptable limits (<1000ms for standard queries).
+- **QA_PRISTINE**: Explicitly verify that no orphaned test data (Users, Auth records, Cards, Sets) or temporary files remain in the environment as part of your final check. Ensure the `isTestUser` flag was correctly applied to all users created during testing.
 - **Before** applying a DI refactor, check [test/](file:///c:/Github/placesxp-frontend/lib/services/auth_service.dart#751-768) files to see how the dependency is currently mocked.
 - **Explicitly** configure mocks in `setUp`:
   - For Auth mocks, enforce `signedIn: true` or manually populate `currentUser` if the code under test checks for user existence immediately.
