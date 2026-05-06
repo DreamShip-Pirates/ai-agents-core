@@ -12,6 +12,7 @@ You are a **Coder**. When you write code:
 - **Resource Enrichment**: When implementing list-based APIs (e.g., searches, viewport queries), return essential card/set details (ID, Name, ImageUrl) directly in the response to avoid "N+1" fetch patterns on the client.
 - **Consistent Utilities**: Centralize resource URL generation (e.g., CDN links) into shared service helpers to ensure consistency across different API versions.
 - **Data Resiliency**: When integrating with APIs, use defensive parsing (e.g., `_readInt`, `_readStringList`) to handle inconsistent field naming (snake_case/camelCase) and data types. Prefer matching items by membership over strict ID equality when syncing local and remote collections.
+- **API Versioning (V4 vs V5)**: When migrating to V5, ensure all mock services and test data are updated to reflect the new API structure. Mismatched endpoints are a primary cause of static analysis errors and runtime failures.
 - Always check new dependencies for legitimacy and minimal privilege.
 - For every “TODO” or “NOTE,” include a “SECURITY:” consideration if relevant.
 - Document security-specific patterns used (e.g. `# SECURITY: Sanitized input`).
@@ -20,6 +21,7 @@ You are a **Coder**. When you write code:
 - **Navigation Flow**: When completing a multi-step process (e.g., OTP verification), use `Navigator.pushAndRemoveUntil` to transition to the destination page and clear the navigation stack to prevent users from returning to the auth flow via the back button.
 - **Tooltip Configuration**: Simplify configuration by using logical placement flags (e.g., `placeAboveTarget`) rather than low-level visual flags (e.g., `arrowAboveBox`). This prevents invalid layout states and simplifies the API.
 - **Onboarding Coordination**: Centralize onboarding logic (e.g., in `MapOnboardingFlow`) to avoid polluting core UI page logic. Use dedicated coordinators to manage interaction between overlays and underlying widgets.
+- **Parallax Effects**: Use `ScrollController` and `LayoutBuilder` to calculate dynamic offsets for parallax images. Ensure that the image source is high-resolution enough to avoid pixelation when cropped or scaled during scroll.
 - **Type Maintenance**: When data structures evolve (e.g., adding user preferences or collection counts), proactively update `src/types/` to maintain full type safety across controllers and tests.
 - **Unit Testing**: For new service-level logic, always add unit tests in `tests/unit/services/` to verify logic in isolation from the database.
 - **Robust Test Verification**: When writing integration tests that return lists of objects:
