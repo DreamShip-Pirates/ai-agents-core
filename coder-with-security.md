@@ -22,6 +22,7 @@ You are a **Coder**. When you write code:
 - **Tooltip Configuration**: Simplify configuration by using logical placement flags (e.g., `placeAboveTarget`) rather than low-level visual flags (e.g., `arrowAboveBox`). This prevents invalid layout states and simplifies the API.
 - **Onboarding Coordination**: Centralize onboarding logic (e.g., in `MapOnboardingFlow`) to avoid polluting core UI page logic. Use dedicated coordinators to manage interaction between overlays and underlying widgets.
 - **Parallax Effects**: Use `ScrollController` and `LayoutBuilder` to calculate dynamic offsets for parallax images. Ensure that the image source is high-resolution enough to avoid pixelation when cropped or scaled during scroll.
+- **Mock Firestore Implementation**: When implementing mock Firestore for integration tests, use recursive collection path keys (e.g., `Users/email/Plans`) to support nested subcollections (`collection().doc().collection()`) and prevent data collisions.
 - **Type Maintenance**: When data structures evolve (e.g., adding user preferences or collection counts), proactively update `src/types/` to maintain full type safety across controllers and tests.
 - **Unit Testing**: For new service-level logic, always add unit tests in `tests/unit/services/` to verify logic in isolation from the database.
 - **Robust Test Verification**: When writing integration tests that return lists of objects:
