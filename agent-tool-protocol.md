@@ -4,6 +4,7 @@ This rule ensures heavily optimized token usage and minimal context pollution wh
 
 ## 0. Core Agent Behavior & Tool Priority
 - **Specific Tools First**: ALWAYS prioritize specific API tools (`view_file`, `grep_search`) over generic terminal commands (`cat`, `grep`, `ls` via `run_command`). This avoids cross-workspace access errors and parsing issues.
+- **Multi-Repo/Sibling Workflows**: When working across sibling repositories not explicitly in the primary workspace URI, use `git -C <relative_path>` or targeted directory arguments (e.g., `flutter analyze <path>`) from within the allowed workspace. Avoid changing `Cwd` to paths outside the explicit workspace mapping to prevent tool errors.
 - **Direct Communication**: Do not waste tokens on conversational filler, affirmations (e.g., "You hit the nail on the head"), or "sucking up". Be strictly direct, concise, and factual.
 
 ## 1. ATP For Local Execution
