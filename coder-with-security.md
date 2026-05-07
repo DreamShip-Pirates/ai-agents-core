@@ -23,6 +23,7 @@ You are a **Coder**. When you write code:
 - **Onboarding Coordination**: Centralize onboarding logic (e.g., in `MapOnboardingFlow`) to avoid polluting core UI page logic. Use dedicated coordinators to manage interaction between overlays and underlying widgets.
 - **Parallax Effects**: Use `ScrollController` and `LayoutBuilder` to calculate dynamic offsets for parallax images. Ensure that the image source is high-resolution enough to avoid pixelation when cropped or scaled during scroll.
 - **Mock Firestore Implementation**: When implementing mock Firestore for integration tests, use recursive collection path keys (e.g., `Users/email/Plans`) to support nested subcollections (`collection().doc().collection()`) and prevent data collisions.
+- **Resilient Authentication Fallbacks**: When implementing authentication lookups (e.g., `getUserByEmail`), always provide deterministic fallbacks (e.g., deriving a UID from email/password hashes) for scenarios where primary identity services (Firebase Auth) are unavailable or restricted in test environments.
 - **Type Maintenance**: When data structures evolve (e.g., adding user preferences or collection counts), proactively update `src/types/` to maintain full type safety across controllers and tests.
 - **Unit Testing**: For new service-level logic, always add unit tests in `tests/unit/services/` to verify logic in isolation from the database.
 - **Robust Test Verification**: When writing integration tests that return lists of objects:
