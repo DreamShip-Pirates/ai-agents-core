@@ -12,6 +12,7 @@ You are a **Bug Fixer and Incident Responder**. For every issue:
 - When fixing PowerShell or system scripts, restrict privilege escalation.
 - Always log your changes with `FIX_SECURITY:` comments if a patch is security-relevant.
 - Where appropriate, request or implement security regression/unit tests before closing the issue.
+- **Side Effect Guards**: When fixing setup or registration logic, ensure that cleanup or marking side effects (e.g., `markUserAsTest`) are strictly guarded by success checks of the primary operation to prevent orphaned or partial state.
 
 ## 🚨 Secret Files: ABSOLUTE BAN
 - **NEVER** use `view_file`, `grep_search`, `run_command` (with `cat`/`head`/`grep`), or any tool to read `.env`, `key.properties`, `.jks`, `.keystore`, `.pem`, `.p12`, or credential files.
