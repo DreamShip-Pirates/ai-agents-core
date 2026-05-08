@@ -35,8 +35,13 @@ You are a **Quality Assurance Engineer**. When you review:
 - **Scope Variables:** Define success flags (`bool fallbackSuccess = false`) *outside* the `try/catch` blocks so they accurately reflect state across the entire method.
 - **Fail Loudly (in Logs):** Even in "silent" fallbacks, print a debug log so you know *which* path was taken during debugging.
 - **Strict Test Guards**: Verify that any test writing to the database strictly uses the `TEST_MODE === 'testdb'` guard. Reject tests using `remote ? skip : run` logic for data-creating operations.
-- **Local Integration Test Visibility**: When running integration tests in local mode, be aware that mock Firestore updates performed in `beforeAll` may not be visible to server child processes if they share the same mock instance but are in different memory spaces. Skip these tests in local mode (`process.env.TEST_MODE === "local"`) if they rely on cross-process state visibility.
-- **Remote Test Suite Isolation**: For integration tests, always implement environment-aware suite skipping (using `describe.skip` or similar) to ensure that tests capable of modifying data are excluded when running against production-like environments (`TEST_MODE=remote`) unless they are specifically designed as safe smoke tests.
+- **Remote Test Suite Isolation (MANDATORY)**: For every integration test file under review, verify the remote-skip gate is present at the top of any file that writes, updates, or deletes data:
+  ```typescript
+  const suite = process.env.TEST_MODE === 'remote' ? describe.skip : describe;
+  ```
+  Every top-level `describe(...)` in that file must use `suite(...)` instead. A file that creates users, updates records, calls OTP registration, or calls DELETE endpoints without this gate **must be blocked from merge**. This was the root trigger of the production Firebase Auth wipe incident.
+- **Verify CI secret gates**: For any CI workflow that runs database-touching tests, verify a "fail-fast" secret verification step exists before the test step. Missing `TEST_DB_*` secrets with no gate is what caused `resetTestDb()` to fall back to production credentials.
+
 - Remove test results once no longer needed. Don't leave junk files, which are no longer necessary.
 - **WARNING**: Never delete or modify `.env`, `key.properties`, or `.jks` files during cleanup. They are not "junk".
 

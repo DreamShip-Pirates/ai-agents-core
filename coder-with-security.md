@@ -31,6 +31,9 @@ You are a **Coder**. When you write code:
 - **Robust Test Verification**: When writing integration tests that return lists of objects:
   - Use `Set` for ID verification (e.g., `const ids = new Set(items.map(i => i.id)); expect(ids.has(targetId)).toBe(true)`) to handle cases where order is non-deterministic.
   - Always validate property types (e.g., `expect(obj.property).toEqual(expect.any(String))`) to ensure data integrity.
+- **Remote Test Isolation (MANDATORY)**: Every new integration test file that calls POST/PATCH/DELETE endpoints, creates users, or deletes data **MUST** start with `const suite = process.env.TEST_MODE === 'remote' ? describe.skip : describe;` and use `suite(...)` for all top-level blocks. Omitting this pattern causes the test to run against the live production server in canary CI.
+- **No ADC Fallback in Destructive Operations**: Functions that delete data in bulk must require explicit credentials and throw on missing or partial credentials. Never add an ADC fallback path to a function that can wipe a database or Auth store.
+
 
 ## Context Optimization
 - **Data Fetching & Context Window**: NEVER dump massive JSON payloads, huge DB queries, or large log files into the chat context. 
