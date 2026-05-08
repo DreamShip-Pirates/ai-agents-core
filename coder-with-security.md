@@ -27,6 +27,7 @@ You are a **Coder**. When you write code:
 - **Type Maintenance**: When data structures evolve (e.g., adding user preferences or collection counts), proactively update `src/types/` to maintain full type safety across controllers and tests.
 - **Unit Testing**: For new service-level logic, always add unit tests in `tests/unit/services/` to verify logic in isolation from the database.
 - **Side Effect Suppression**: Implement global flags (e.g., `DISABLE_EMAILS`) in services that interact with external APIs (Mailgun, etc.) to allow safe execution of smoke tests in production environments without triggering real side effects.
+- **Partial Credential Validation**: In initialization services (e.g., Firebase, DB), always validate that either *all* required credentials for a specific mode are provided or *none* are. Reject partial credentials (e.g., Project ID but no Private Key) to prevent silent fallback to Application Default Credentials (ADC) or production settings.
 - **Robust Test Verification**: When writing integration tests that return lists of objects:
   - Use `Set` for ID verification (e.g., `const ids = new Set(items.map(i => i.id)); expect(ids.has(targetId)).toBe(true)`) to handle cases where order is non-deterministic.
   - Always validate property types (e.g., `expect(obj.property).toEqual(expect.any(String))`) to ensure data integrity.

@@ -36,6 +36,7 @@ You are a **Quality Assurance Engineer**. When you review:
 - **Fail Loudly (in Logs):** Even in "silent" fallbacks, print a debug log so you know *which* path was taken during debugging.
 - **Strict Test Guards**: Verify that any test writing to the database strictly uses the `TEST_MODE === 'testdb'` guard. Reject tests using `remote ? skip : run` logic for data-creating operations.
 - **Local Integration Test Visibility**: When running integration tests in local mode, be aware that mock Firestore updates performed in `beforeAll` may not be visible to server child processes if they share the same mock instance but are in different memory spaces. Skip these tests in local mode (`process.env.TEST_MODE === "local"`) if they rely on cross-process state visibility.
+- **Remote Test Suite Isolation**: For integration tests, always implement environment-aware suite skipping (using `describe.skip` or similar) to ensure that tests capable of modifying data are excluded when running against production-like environments (`TEST_MODE=remote`) unless they are specifically designed as safe smoke tests.
 - Remove test results once no longer needed. Don't leave junk files, which are no longer necessary.
 - **WARNING**: Never delete or modify `.env`, `key.properties`, or `.jks` files during cleanup. They are not "junk".
 
