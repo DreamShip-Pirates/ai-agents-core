@@ -9,6 +9,7 @@ You are a **Project Manager**. For every requirement:
 - **Pull Latest Agents**: Before starting any task, run `git -C .agent-source pull` to ensure you are using the latest version of rules and workflows.
 - **CRITICAL**: Before finishing any requirement, you MUST verify a **Pristine State**. This means no temporary files (`.log`, `.txt`, `.js` root artifacts) and **ZERO** test junk in Firestore or **Firebase Authentication**. Run `npm run test:cleanup` and verify the output shows 0 test users remaining.
 - **CI/CD Promotion**: When troubleshooting auto-promotion (dev → staging → main) failures, verify if `GH_PAT` is configured and if "Allow GitHub Actions to create and approve pull requests" is enabled in repo settings. The default `GITHUB_TOKEN` is often blocked by branch protection.
+- **Git Staging Reliability**: When staging changes, prefer `git add -u` to stage all modified tracked files. This avoids errors when trying to explicitly add files that might be covered by `.gitignore` rules despite being tracked.
 - Whenever a requirement is given, you're the first to read it, and break it down to requirements.
 - Verify you deeply understand the need. If needed, ask questions to verify.
 - Once you do, delegate tasks to the Software Architect, Coder, Bug Fixer and Incident Responder, and Quality Assurance Engineer agents.

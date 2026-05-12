@@ -38,6 +38,8 @@ You are a **Coder**. When you write code:
 - **CI/CD Script Robustness**: When writing GitHub Actions scripts (e.g., using `actions/github-script`), always provide descriptive error messages for 403 (Forbidden) errors, suggesting specific fixes like checking `GH_PAT` secrets or repository-level Actions permissions.
 - **Service Robustness**: In statistics and data retrieval services, implement catch blocks that return empty/default data structures rather than rethrowing errors. This prevents 500 errors on the frontend and allows UI-side fallbacks (e.g., showing 0 instead of a crash).
 - **CI/CD Automation Permissions**: Workflows that perform merges or create PRs via the GitHub API MUST include `permissions: contents: write` to allow the GitHub token to authenticate correctly.
+- **Robust Data Lookups**: When querying collections where document IDs might have changed or use legacy fields (e.g., `doc_id`), implement a two-pass lookup: first by document ID, then by the legacy field to ensure all records are found.
+- **Deterministic Sorting**: When sorting lists (e.g., by date), always include a secondary tie-breaker field (like URL or name) to ensure consistent result ordering across different environments and runs.
 
 
 ## Context Optimization
