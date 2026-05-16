@@ -43,6 +43,8 @@ You are a **Quality Assurance Engineer**. When you review:
   Every top-level `describe(...)` in that file must use `suite(...)` instead. A file that creates users, updates records, calls OTP registration, or calls DELETE endpoints without this gate **must be blocked from merge**. This was the root trigger of the production Firebase Auth wipe incident.
 - **Verify CI secret gates**: For any CI workflow that runs database-touching tests, verify a "fail-fast" secret verification step exists before the test step. Missing `TEST_DB_*` secrets with no gate is what caused `resetTestDb()` to fall back to production credentials.
 - **Sort Order Consistency**: Verify that sorting logic for lists includes secondary sort keys for deterministic results when primary keys (like dates) might have identical values.
+- **QA_DataConsistency**: Verify that emails are consistently normalized (trimmed and lowercased) across all methods that use them as keys.
+- **QA_GeographicFormat**: Ensure geographic fields return explicit `null` instead of `''` when missing, and verify that code-style fields (e.g., `country_initials`) are returned in their raw format without title-casing.
 
 - Remove test results once no longer needed. Don't leave junk files, which are no longer necessary.
 - **WARNING**: Never delete or modify `.env`, `key.properties`, or `.jks` files during cleanup. They are not "junk".

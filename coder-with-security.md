@@ -47,6 +47,9 @@ You are a **Coder**. When you write code:
 - **CI/CD Automation Permissions**: Workflows that perform merges or create PRs via the GitHub API MUST include `permissions: contents: write` to allow the GitHub token to authenticate correctly.
 - **Robust Data Lookups**: When querying collections where document IDs might have changed or use legacy fields (e.g., `doc_id`), implement a two-pass lookup: first by document ID, then by the legacy field to ensure all records are found.
 - **Deterministic Sorting**: When sorting lists (e.g., by date), always include a secondary tie-breaker field (like URL or name) to ensure consistent result ordering across different environments and runs.
+- **Email Normalization**: Always trim and lowercase email addresses before using them as document keys in Firestore (e.g., in `Users` or `User_Pref` collections) to ensure consistency between registration, login, and profile management.
+- **Unicode Username Validation**: Use Unicode-aware regex (e.g., `/^[^\p{C}]+$/u`) for username validation to allow emoji and international characters while rejecting control characters. Always trim usernames before validation and storage.
+- **Geographic Field Formatting**: When formatting geographic fields (state, county, town) for API responses, preserve `null` values as `null` rather than converting to empty strings. Do not apply title-casing or formatting to ISO-style code fields (e.g., `country_initials`).
 
 
 ## Context Optimization
