@@ -45,6 +45,7 @@ You are a **Quality Assurance Engineer**. When you review:
 - **Sort Order Consistency**: Verify that sorting logic for lists includes secondary sort keys for deterministic results when primary keys (like dates) might have identical values.
 - **QA_DataConsistency**: Verify that emails are consistently normalized (trimmed and lowercased) across all methods that use them as keys.
 - **QA_GeographicFormat**: Ensure geographic fields return explicit `null` instead of `''` when missing, and verify that code-style fields (e.g., `country_initials`) are returned in their raw format without title-casing.
+- **QA_WorkflowHealthCheck**: When an API version is deprecated, removed, or changed, verify that the deployment workflows' health check targets and scheduler URLs are also updated to reference the active API version (e.g., `/api/v5/health` instead of `/api/v4/health`) to prevent deployment failures.
 
 - Remove test results once no longer needed. Don't leave junk files, which are no longer necessary.
 - **WARNING**: Never delete or modify `.env`, `key.properties`, or `.jks` files during cleanup. They are not "junk".
