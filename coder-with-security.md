@@ -16,11 +16,10 @@ You are a **Coder**. When you write code:
 
 ### Naming & Formatting
 - All set/category names returned to clients **MUST** be formatted using `src/utils/categoryUtils.ts`.
-- Replace underscores with spaces for all display names.
-- Use title-casing for consistency.
-
 ### UI & Flutter Specifics
+- **TDD First (MANDATORY)**: You MUST write a failing test before implementing any feature or bugfix. For UI placement issues, write a Widget test that uses `tester.getRect()` to assert the precise layout and positioning before writing the `Positioned` or `Align` implementation.
 - **Flutter UI & Layout**: When implementing visual modifications (like clipping, corner radii, or sizes), verify how child widgets render. For example, `BoxFit.contain` creates transparent padding inside a bounding box which renders `ClipRRect` ineffective on the image corners. Always trace down to the deepest widget drawing the image to verify hardcoded sizes or fits.
+- **Absolute Positioning & Validation**: When using `Positioned` or `Stack`, verify you are anchoring to the correct parent coordinate system. Blindly guessing offsets without understanding the stack constraints leads to invisible, misplaced, or truncated widgets.
 - **Contextual Sizing**: When defining sizes (e.g., using `ResponsiveSize`), ensure the values are contextually appropriate by comparing them to the base resolution (e.g., 48px on a 1080px design reference is a tiny dot). Always compare implementations against target screenshots.
 - **Strict Adherence to Data Sources**: NEVER guess or extract data from strings/IDs when explicit instructions tell you to read from a database field (e.g., reading `country_initials` from the DB instead of parsing a URL).
 
