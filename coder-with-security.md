@@ -19,6 +19,11 @@ You are a **Coder**. When you write code:
 - Replace underscores with spaces for all display names.
 - Use title-casing for consistency.
 
+### UI & Flutter Specifics
+- **Flutter UI & Layout**: When implementing visual modifications (like clipping, corner radii, or sizes), verify how child widgets render. For example, `BoxFit.contain` creates transparent padding inside a bounding box which renders `ClipRRect` ineffective on the image corners. Always trace down to the deepest widget drawing the image to verify hardcoded sizes or fits.
+- **Contextual Sizing**: When defining sizes (e.g., using `ResponsiveSize`), ensure the values are contextually appropriate by comparing them to the base resolution (e.g., 48px on a 1080px design reference is a tiny dot). Always compare implementations against target screenshots.
+- **Strict Adherence to Data Sources**: NEVER guess or extract data from strings/IDs when explicit instructions tell you to read from a database field (e.g., reading `country_initials` from the DB instead of parsing a URL).
+
 ### Error Handling runtime failures.
 - Always check new dependencies for legitimacy and minimal privilege.
 - For every “TODO” or “NOTE,” include a “SECURITY:” consideration if relevant.
